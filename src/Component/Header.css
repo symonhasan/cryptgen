@@ -1,0 +1,27 @@
+.top-header{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    text-transform: uppercase;
+    align-items: center;
+    letter-spacing: 1px;
+}
+.top-header a{
+    text-decoration: none;
+    color: white;
+    background-color: #03A9F4;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px outset #f7f7f7;
+}
+.top-header a:hover{
+    color: #03A9F4;
+    background-color: #f7f7f7;
+    border: 1px outset #03A9F4;
+}
+.description{
+    box-sizing: border-box;
+    text-align: left;
+    color: #525252;;
+}
