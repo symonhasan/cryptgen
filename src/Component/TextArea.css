@@ -31,7 +31,7 @@
     border-radius: 20px;
     font-size: 0.7rem;
 }
-@media only screen and ( max-width: 550px){
+@media only screen and ( max-width: 800px){
     .text-area{
         flex-direction: column;
         

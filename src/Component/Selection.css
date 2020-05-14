@@ -30,7 +30,7 @@
    background-color: #e0e0e0;
    color: #2962FF;
 }
-@media only screen and ( max-width: 550px){
+@media only screen and ( max-width: 800px){
     .selection-area{
         flex-direction: column;
     }
