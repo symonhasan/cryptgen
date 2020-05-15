@@ -6,6 +6,7 @@
     text-transform: uppercase;
     align-items: center;
     letter-spacing: 1px;
+    border-bottom: 1px solid #e5e5e5;
 }
 .top-header a{
     text-decoration: none;
@@ -24,4 +25,7 @@
     box-sizing: border-box;
     text-align: left;
     color: #525252;;
+}
+.description a{
+    text-decoration: none;
 }

@@ -186,13 +186,7 @@ class App extends Component {
 			<div className="App">
 				<Header siteTitle="CryptGen" />
 				<Description>
-					This project is under active development and license under
-					the <strong>MIT license</strong> where you can encode and
-					decode between different format systems. This happens fully
-					in your browser using <strong>JavaScript</strong>, no
-					content will be sent to any kind of server. Please note that
-					the encryption methods offered below are very basic and
-					therefore <strong>not considered as secure.</strong>
+					This project is license under the <strong>MIT license</strong> and still under active development inspired from <a href="https://v2.cryptii.com">Cryptii</a>. This site fully run into your browser therefore no contents won't sent to any kind of server. Here you can encode and decode your text between different format systems. Please note that the encryption methods offered here are very basic and therefore <strong>not considered as secure.</strong>
 				</Description>
 				<SelectionArea
 					leftmode={this.state.currentInterpret}
