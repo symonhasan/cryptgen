@@ -18,7 +18,7 @@ function App() {
 	};
 
 	const [currentInterpret, setInterpret] = useState("Text");
-	const [currentConvert, setConvert] = useState("Cipher");
+	const [currentConvert, setConvert] = useState("Flipped");
 
 	const [interpretClicked, setInterpretClicked] = useState(false);
 	const [convertClicked, setConvertClicked] = useState(false);
