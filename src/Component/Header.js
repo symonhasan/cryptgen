@@ -19,7 +19,7 @@ export const Header = (props) => {
     return (
         <div className="top-header">
             <Title siteTitle={props.siteTitle} />
-            <a href="github.com">Github</a>
+            <a href="https://github.com/symonhasan/cryptgen">Github</a>
         </div>
     );
 }
