@@ -5,10 +5,8 @@ import { SelectionArea } from "./Component/Selection";
 import TextArea from "./Component/TextArea";
 
 class App extends Component {
-
-	
-	convertText = (str) => {
-		const flipStr = () => {
+	convertText = (str, mode) => {
+		const flipStr = (str) => {
 			let outputStr = "";
 			for (let i = str.length - 1; i >= 0; i--) {
 				outputStr += str[i];
@@ -22,14 +20,58 @@ class App extends Component {
 			}
 			return outputStr;
 		};
+		const baseConvert = (number, base) => {
+			let res = "";
+			while (number !== 0) {
+				let ld = Math.floor(number % base);
+				if( ld > 9 ){
+					ld = String.fromCharCode( ld + 55 );
+				}
+				console.log( ld );
+				res += ld;
+				number = Math.floor(number / base);
+			}
+			res = flipStr(res);
+			return res;
+		};
+		const toBinary = (str) => {
+			let outputStr = "";
+			for (let i = 0; i < str.length; i++) {
+				outputStr += baseConvert(str.charCodeAt(i), 2);
+				outputStr += " ";
+			}
+			return outputStr;
+		};
+		const toOctal = (str) => {
+			let outputStr = "";
+			for (let i = 0; i < str.length; i++) {
+				outputStr += baseConvert(str.charCodeAt(i), 8);
+				outputStr += " ";
+			}
+			return outputStr;
+		};
+		const toHexa = (str) => {
+			let outputStr = "";
+			for (let i = 0; i < str.length; i++) {
+				outputStr += baseConvert(str.charCodeAt(i), 16);
+				outputStr += " ";
+			}
+			return outputStr;
+		};
 
-		switch (this.state.currentConvert) {
+		switch (mode) {
 			case "Flipped":
-				return flipStr();
+				return flipStr(str);
 			case "Decimal":
 				return toDecimal();
+			case "Binary":
+				return toBinary(str);
+			case "Octal":
+				return toOctal(str);
+			case "Hexadecimal":
+				return toHexa(str);
 			default:
-				break;
+				return this.state.inputText;
 		}
 	};
 
@@ -39,31 +81,9 @@ class App extends Component {
 		interpretClicked: false,
 		convertClicked: false,
 		inputText: "The quick brown fox jumps over 13 lazy dogs.",
-		outputText: "",
 		inputTextLen: 0,
 		outputTextLen: 0,
 	};
-
-	UNSAFE_componentWillMount(){
-		console.log("Component Will Mount");
-		this.setState(
-			{
-				outputText: this.convertText( this.state.inputText ),
-				inputTextLen: this.state.inputText.length,
-				outputTextLen: this.state.outputText.length
-			}
-		)
-	}
-	componentDidMount()
-	{
-		console.log("Componant Did Mount");
-		console.log( this.state );
-	}
-	componentWillUpdate(){
-		console.log("Componant Will Update");
-		console.log( "=> " , this.state);
-	}
-
 	selectionList = [
 		{
 			name: "Text",
@@ -94,6 +114,29 @@ class App extends Component {
 				"54 68 65 20 71 75 69 63 6b 20 62 72 6f 77 6e 20 66 6f 78 20 6a 75 6d 70 73 20 6f 76 65 72 20 31 33 20 6c 61 7a 79 20 64 6f 67 73 2e",
 		},
 	];
+	UNSAFE_componentWillMount() {
+		this.setState({
+			outputText: this.convertText(
+				this.state.inputText,
+				this.state.currentConvert
+			),
+		});
+	}
+	componentDidMount() {
+		this.setState({
+			inputTextLen: this.state.inputText.length,
+			outputTextLen: this.state.outputText.length,
+		});
+	}
+
+	transformState = () => {
+		this.setState({
+			outputText: this.convertText(
+				this.state.inputText,
+				this.state.currentConvert
+			),
+		});
+	};
 
 	showSelectOptionLeft = (event) => {
 		this.setState({
@@ -113,7 +156,10 @@ class App extends Component {
 		this.setState({
 			inputText: event.target.value,
 			inputTextLen: this.state.inputText.length,
-			outputText: this.convertText(event.target.value),
+			outputText: this.convertText(
+				event.target.value,
+				this.state.currentConvert
+			),
 			outputTextLen: this.state.outputText.length,
 		});
 		// console.log( this.state );
@@ -131,6 +177,7 @@ class App extends Component {
 			this.setState({
 				currentConvert: newConvert,
 				convertClicked: false,
+				outputText: this.convertText(this.state.inputText, newConvert),
 			});
 		}
 	};
@@ -168,5 +215,4 @@ class App extends Component {
 		);
 	}
 }
-
 export default App;

@@ -49,7 +49,9 @@ const renderRightSide = (props) => {
 				<SelectArea list={props.list} selectfunc={props.selectfunc}></SelectArea>
 			</div>
 		);
-	else return <TextBox value={props.outputtext} len={props.outputtextlen} />;
+	else {
+		return <TextBox value={props.outputtext} len={props.outputtextlen}/>;
+	}
 };
 
 const TextArea = (props) => {
