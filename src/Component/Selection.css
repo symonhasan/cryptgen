@@ -14,14 +14,14 @@
 }
 .selection-left{
     background-color: #039BE5;
-    min-width: 35vw;
+    min-width: 50%;
     padding: 10px 30px;
     box-sizing: border-box;
     cursor: pointer;
 }
 .selection-right{
     background-color: #03A9F4;
-    min-width: 35vw;
+    min-width: 50%;
     padding: 10px 30px;
     box-sizing: border-box;
     cursor: pointer;
