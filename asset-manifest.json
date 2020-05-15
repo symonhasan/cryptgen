@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/cryptgen/static/css/main.5e1b3d26.chunk.css",
+    "main.css": "/cryptgen/static/css/main.43d8e775.chunk.css",
     "main.js": "/cryptgen/static/js/main.2ea0dc69.chunk.js",
     "main.js.map": "/cryptgen/static/js/main.2ea0dc69.chunk.js.map",
     "runtime-main.js": "/cryptgen/static/js/runtime-main.517ab807.js",
@@ -8,15 +8,15 @@
     "static/js/2.4953589c.chunk.js": "/cryptgen/static/js/2.4953589c.chunk.js",
     "static/js/2.4953589c.chunk.js.map": "/cryptgen/static/js/2.4953589c.chunk.js.map",
     "index.html": "/cryptgen/index.html",
-    "precache-manifest.1e709c73e44cb582136a4b3e4ce9b040.js": "/cryptgen/precache-manifest.1e709c73e44cb582136a4b3e4ce9b040.js",
+    "precache-manifest.52fea46c718b19fe5113123b9346110c.js": "/cryptgen/precache-manifest.52fea46c718b19fe5113123b9346110c.js",
     "service-worker.js": "/cryptgen/service-worker.js",
-    "static/css/main.5e1b3d26.chunk.css.map": "/cryptgen/static/css/main.5e1b3d26.chunk.css.map",
+    "static/css/main.43d8e775.chunk.css.map": "/cryptgen/static/css/main.43d8e775.chunk.css.map",
     "static/js/2.4953589c.chunk.js.LICENSE.txt": "/cryptgen/static/js/2.4953589c.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.517ab807.js",
     "static/js/2.4953589c.chunk.js",
-    "static/css/main.5e1b3d26.chunk.css",
+    "static/css/main.43d8e775.chunk.css",
     "static/js/main.2ea0dc69.chunk.js"
   ]
 }
