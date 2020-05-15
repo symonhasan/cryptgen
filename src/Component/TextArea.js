@@ -7,7 +7,7 @@ const TextBox = (props) => {
 			<textarea
 				rows="12"
 				onChange={props.func}
-				defaultValue={props.value}
+				value={props.value}
 			></textarea>
 			<div className="bar">
 				<p>{props.len}</p>

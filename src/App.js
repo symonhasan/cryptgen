@@ -1,18 +1,70 @@
-import React, { useState } from "react";
+import React, { Component } from "react";
 import "./App.css";
 import { Header, Description } from "./Component/Header";
 import { SelectionArea } from "./Component/Selection";
 import TextArea from "./Component/TextArea";
 
-function App() {
+class App extends Component {
+
 	
-	const [currentInterpret, setInterpret] = useState("Text");
-	const [currentConvert, setConvert] = useState("Flipped");
+	convertText = (str) => {
+		const flipStr = () => {
+			let outputStr = "";
+			for (let i = str.length - 1; i >= 0; i--) {
+				outputStr += str[i];
+			}
+			return outputStr;
+		};
+		const toDecimal = () => {
+			let outputStr = "";
+			for (let i = 0; i < str.length; i++) {
+				outputStr += str.charCodeAt(i) + " ";
+			}
+			return outputStr;
+		};
 
-	const [interpretClicked, setInterpretClicked] = useState(false);
-	const [convertClicked, setConvertClicked] = useState(false);
+		switch (this.state.currentConvert) {
+			case "Flipped":
+				return flipStr();
+			case "Decimal":
+				return toDecimal();
+			default:
+				break;
+		}
+	};
 
-	const selectionList = [
+	state = {
+		currentInterpret: "Text",
+		currentConvert: "Flipped",
+		interpretClicked: false,
+		convertClicked: false,
+		inputText: "The quick brown fox jumps over 13 lazy dogs.",
+		outputText: "",
+		inputTextLen: 0,
+		outputTextLen: 0,
+	};
+
+	UNSAFE_componentWillMount(){
+		console.log("Component Will Mount");
+		this.setState(
+			{
+				outputText: this.convertText( this.state.inputText ),
+				inputTextLen: this.state.inputText.length,
+				outputTextLen: this.state.outputText.length
+			}
+		)
+	}
+	componentDidMount()
+	{
+		console.log("Componant Did Mount");
+		console.log( this.state );
+	}
+	componentWillUpdate(){
+		console.log("Componant Will Update");
+		console.log( "=> " , this.state);
+	}
+
+	selectionList = [
 		{
 			name: "Text",
 			sample: "The quick brown fox jumps over 13 lazy dogs.",
@@ -43,109 +95,78 @@ function App() {
 		},
 	];
 
-	const [inputText, setInputText] = useState(
-		"The quick brown fox jumps over 13 lazy dogs."
-	);
-	const [outputText, setOutputText] = useState("");
-
-	const [inputTextLen, setInputTextLen] = useState(inputText.length);
-	const [outputTextLen, setOutputTextLen] = useState(outputText.length);
-
-	const showSelectOptionLeft = (event) => {
-		// console.log( "Clicked!");
-		setInterpretClicked( !interpretClicked );
-		setConvertClicked(false);
+	showSelectOptionLeft = (event) => {
+		this.setState({
+			interpretClicked: !this.state.interpretClicked,
+			convertClicked: false,
+		});
 	};
 
-	const showSelectOptionRight = (event) => {
-		// console.log( "Clicked!");
-		setConvertClicked(!convertClicked);
-		setInterpretClicked( false );
+	showSelectOptionRight = (event) => {
+		this.setState({
+			convertClicked: !this.state.convertClicked,
+			interpretClicked: false,
+		});
 	};
 
-	const convertText = (str) => {
-		
-		const flipStr = ( ) => {
-			let outputStr = "";
-			for( let i = str.length - 1; i >=0 ; i-- )
-			{
-				outputStr += str[ i ];
-			}
-			return outputStr;
-		}
-		const toDecimal = () => {
-			let outputStr = "";
-			for( let i = 0; i < str.length ; i++ )
-			{
-				outputStr += str.charCodeAt( i ) + " ";
-			}
-			return outputStr;
-		}
-
-		switch( currentConvert ){
-			case "Flipped":
-				return flipStr();
-			case "Decimal":
-				return toDecimal();
-			default:
-				break;
-		}	
-	
+	updateInputText = (event) => {
+		this.setState({
+			inputText: event.target.value,
+			inputTextLen: this.state.inputText.length,
+			outputText: this.convertText(event.target.value),
+			outputTextLen: this.state.outputText.length,
+		});
+		// console.log( this.state );
 	};
 
-	const updateInputText = (event) => {
-		setInputText(event.target.value);
-		setInputTextLen(inputText.length);
-		setOutputText(convertText(event.target.value));
-		setOutputTextLen(outputText.length);
+	selectionClicked = (event) => {
+		if (this.state.interpretClicked) {
+			const newInterpret = event.target.getAttribute("value");
+			this.setState({
+				currentInterpret: newInterpret,
+				interpretClicked: false,
+			});
+		} else if (this.state.convertClicked) {
+			const newConvert = event.target.getAttribute("value");
+			this.setState({
+				currentConvert: newConvert,
+				convertClicked: false,
+			});
+		}
 	};
-
-	const selectionClicked = (event) => {
-		if( interpretClicked )
-		{
-			const newInterpret = event.target.getAttribute('value');
-			setInterpret( newInterpret );
-			setInterpretClicked( false );
-		}
-		else if( convertClicked )
-		{
-			const newConvert = event.target.getAttribute('value');
-			setConvert( newConvert );
-			setConvertClicked( false );
-		}
+	render() {
+		return (
+			<div className="App">
+				<Header siteTitle="CryptGen" />
+				<Description>
+					This project is under active development and license under
+					the <strong>MIT license</strong> where you can encode and
+					decode between different format systems. This happens fully
+					in your browser using <strong>JavaScript</strong>, no
+					content will be sent to any kind of server. Please note that
+					the encryption methods offered below are very basic and
+					therefore <strong>not considered as secure.</strong>
+				</Description>
+				<SelectionArea
+					leftmode={this.state.currentInterpret}
+					rightmode={this.state.currentConvert}
+					leftclick={this.showSelectOptionLeft}
+					rightclick={this.showSelectOptionRight}
+				/>
+				<TextArea
+					inputtext={this.state.inputText}
+					inputtextlen={this.state.inputTextLen}
+					outputtext={this.state.outputText}
+					outputtextlen={this.state.outputTextLen}
+					func={this.updateInputText}
+					leftmode={this.state.interpretClicked}
+					rightmode={this.state.convertClicked}
+					list={this.selectionList}
+					selectfunc={this.selectionClicked}
+				/>
+			</div>
+		);
 	}
-
-	return (
-		<div className="App">
-			<Header siteTitle="CryptGen" />
-			<Description>
-				This project is under active development and license under the{" "}
-				<strong>MIT license</strong> where you can encode and decode
-				between different format systems. This happens fully in your
-				browser using <strong>JavaScript</strong>, no content will be
-				sent to any kind of server. Please note that the encryption
-				methods offered below are very basic and therefore{" "}
-				<strong>not considered as secure.</strong>
-			</Description>
-			<SelectionArea
-				leftmode={currentInterpret}
-				rightmode={currentConvert}
-				leftclick={showSelectOptionLeft}
-				rightclick={showSelectOptionRight}
-			/>
-			<TextArea
-				inputtext={inputText}
-				inputtextlen={inputTextLen}
-				outputtext={outputText}
-				outputtextlen={outputTextLen}
-				func={updateInputText}
-				leftmode={interpretClicked}
-				rightmode={convertClicked}
-				list={selectionList}
-				selectfunc={selectionClicked}
-			/>
-		</div>
-	);
 }
 
 export default App;
