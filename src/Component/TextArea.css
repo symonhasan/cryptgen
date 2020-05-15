@@ -37,6 +37,7 @@
     flex-wrap: wrap;
     box-sizing: border-box;
     width: 34vw;
+    
 }
 .selection{
     display: flex;
@@ -47,9 +48,9 @@
     text-overflow: ellipsis;
     cursor: pointer;
     align-items: center;
-}
-.selection p{
-    margin: 5px;
+    border-bottom: 1px solid #e0e0e0;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 .selection-name{
     font-size: 1.2rem;
@@ -57,11 +58,16 @@
     border-radius: 3px;
     color: white;
     padding: 5px;
+    margin: 0px;
     margin-right: 2px;
 }
 .selection-sample{
     letter-spacing: 1px;
+    margin: 0px;
     margin-left: 2px;
+}
+.selection-sample:hover{
+    color: #1E88E5;
 }
 @media only screen and ( max-width: 800px){
     .text-area{

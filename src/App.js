@@ -65,11 +65,13 @@ function App() {
 	const showSelectOptionLeft = (event) => {
 		// console.log( "Clicked!");
 		setInterpretClicked( !interpretClicked );
+		setConvertClicked(false);
 	};
 
 	const showSelectOptionRight = (event) => {
 		// console.log( "Clicked!");
 		setConvertClicked(!convertClicked);
+		setInterpretClicked( false );
 	};
 
 	const updateInputText = (event) => {
@@ -78,6 +80,21 @@ function App() {
 		setOutputText(convertText(event.target.value));
 		setOutputTextLen(outputText.length);
 	};
+
+	const selectionClicked = (event) => {
+		if( interpretClicked )
+		{
+			const newInterpret = event.target.getAttribute('value');
+			setInterpret( newInterpret );
+			setInterpretClicked( false );
+		}
+		else if( convertClicked )
+		{
+			const newConvert = event.target.getAttribute('value');
+			setConvert( newConvert );
+			setConvertClicked( false );
+		}
+	}
 
 	return (
 		<div className="App">
@@ -106,6 +123,7 @@ function App() {
 				leftmode={interpretClicked}
 				rightmode={convertClicked}
 				list={selectionList}
+				selectfunc={selectionClicked}
 			/>
 		</div>
 	);

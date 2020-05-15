@@ -18,9 +18,9 @@ const TextBox = (props) => {
 const SelectArea = (props) => {
 	return props.list.map((select, index) => {
 		return (
-			<div key={index} className="selection">
-				<p className="selection-name">{select.name}</p>
-				<p className="selection-sample">{select.sample}</p>
+			<div key={index} value={select.name} className="selection" onClick={props.selectfunc}>
+				<p className="selection-name" value={select.name}>{select.name}</p>
+				<p className="selection-sample" value={select.name}>{select.sample}</p>
 			</div>
 		);
 	});
@@ -30,7 +30,7 @@ const renderLeftSide = (props) => {
 	if (props.leftmode)
 		return (
 			<div className="selectlist-area">
-				<SelectArea list={props.list}></SelectArea>
+				<SelectArea list={props.list} selectfunc={props.selectfunc}></SelectArea>
 			</div>
 		);
 	else
@@ -46,7 +46,7 @@ const renderRightSide = (props) => {
 	if (props.rightmode)
 		return (
 			<div className="selectlist-area">
-				<SelectArea list={props.list}></SelectArea>
+				<SelectArea list={props.list} selectfunc={props.selectfunc}></SelectArea>
 			</div>
 		);
 	else return <TextBox value={props.outputtext} len={props.outputtextlen} />;
