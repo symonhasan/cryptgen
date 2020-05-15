@@ -5,18 +5,7 @@ import { SelectionArea } from "./Component/Selection";
 import TextArea from "./Component/TextArea";
 
 function App() {
-	const convertText = (str) => {
-		let str1 = "";
-		for (let i = 0; i < str.length; i++) {
-			if (str[i] !== " ") {
-				str1 += String.fromCharCode(str.charCodeAt(i) + 5);
-			} else {
-				str1 += str[i];
-			}
-		}
-		return str1;
-	};
-
+	
 	const [currentInterpret, setInterpret] = useState("Text");
 	const [currentConvert, setConvert] = useState("Flipped");
 
@@ -72,6 +61,36 @@ function App() {
 		// console.log( "Clicked!");
 		setConvertClicked(!convertClicked);
 		setInterpretClicked( false );
+	};
+
+	const convertText = (str) => {
+		
+		const flipStr = ( ) => {
+			let outputStr = "";
+			for( let i = str.length - 1; i >=0 ; i-- )
+			{
+				outputStr += str[ i ];
+			}
+			return outputStr;
+		}
+		const toDecimal = () => {
+			let outputStr = "";
+			for( let i = 0; i < str.length ; i++ )
+			{
+				outputStr += str.charCodeAt( i ) + " ";
+			}
+			return outputStr;
+		}
+
+		switch( currentConvert ){
+			case "Flipped":
+				return flipStr();
+			case "Decimal":
+				return toDecimal();
+			default:
+				break;
+		}	
+	
 	};
 
 	const updateInputText = (event) => {
