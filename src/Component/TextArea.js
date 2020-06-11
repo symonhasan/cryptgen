@@ -50,7 +50,7 @@ const renderRightSide = (props) => {
 			</div>
 		);
 	else {
-		return <TextBox value={props.outputtext} len={props.outputtextlen}/>;
+		return <TextBox value={props.outputtext} len={props.outputtextlen} func={( e ) => {}}/>; // warning
 	}
 };
 
