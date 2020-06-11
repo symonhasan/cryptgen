@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import "./App.css";
-import { Header, Description } from "./Component/Header";
-import { SelectionArea } from "./Component/Selection";
-import TextArea from "./Component/TextArea";
+import { Header, Description } from "./Components/Header";
+import { SelectionArea } from "./Components/Selection";
+import TextArea from "./Components/TextArea";
 import {convertText} from "./functions/ConvertFunctions";
 import {selectionList} from "./Data/data";
 
