@@ -4,6 +4,7 @@ import { Header, Description } from "./Components/Header";
 import { SelectionArea } from "./Components/Selection";
 import TextArea from "./Components/TextArea";
 import {setConvertText} from "./Functions/ConvertFunctions";
+import {setOriginalText} from "./Functions/InterpretFunctions";
 import {selectionList} from "./Data/data";
 
 class App extends Component {
@@ -55,10 +56,16 @@ class App extends Component {
 			interpretedText: event.target.value,
 			interpretedTextLen: event.target.value.length,
 		});
-		const convertedOutput = setConvertText( event.target.value , this.state.currentConvertTo );
+
+		const currentInterpretAs = this.state.currentInterpretAs;
+		const currentOriginalText = setOriginalText( event.target.value , currentInterpretAs );
+		const currentConvertTo = this.state.currentConvertTo;
+
+		const convertedOutput = setConvertText( currentOriginalText , currentConvertTo );
 		this.setState({
 			convertedText: convertedOutput,
 			convertedTextLen: convertedOutput.length,
+			originalText: currentOriginalText
 		})
 		
 	};
@@ -66,13 +73,21 @@ class App extends Component {
 	selectionClicked = (event) => {
 		if (this.state.interpretAsClicked) {
 			const newInterpret = event.target.getAttribute("value");
+			const newOriginalText = setOriginalText( this.state.interpretedText , newInterpret );
+
+			const newConvertedTo = setConvertText( newOriginalText , this.state.currentConvertTo );
+
 			this.setState({
 				currentInterpretAs: newInterpret,
 				interpretAsClicked: false,
+				originalText: newOriginalText,
+				convertedText: newConvertedTo,
+				convertedTextLen: newConvertedTo.length
 			});
 		} else if (this.state.convertToClicked) {
 			const newConvert = event.target.getAttribute("value");
-			const convertedOutput = setConvertText( this.state.interpretedText , newConvert );
+			const currentOriginalText = this.state.originalText;
+			const convertedOutput = setConvertText( currentOriginalText , newConvert );
 			this.setState({
 				currentConvertTo: newConvert,
 				convertToClicked: false,
