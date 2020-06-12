@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/cryptgen/static/css/main.43d8e775.chunk.css",
-    "main.js": "/cryptgen/static/js/main.ea8a0582.chunk.js",
-    "main.js.map": "/cryptgen/static/js/main.ea8a0582.chunk.js.map",
+    "main.js": "/cryptgen/static/js/main.d9104217.chunk.js",
+    "main.js.map": "/cryptgen/static/js/main.d9104217.chunk.js.map",
     "runtime-main.js": "/cryptgen/static/js/runtime-main.517ab807.js",
     "runtime-main.js.map": "/cryptgen/static/js/runtime-main.517ab807.js.map",
-    "static/js/2.4953589c.chunk.js": "/cryptgen/static/js/2.4953589c.chunk.js",
-    "static/js/2.4953589c.chunk.js.map": "/cryptgen/static/js/2.4953589c.chunk.js.map",
+    "static/js/2.961cf562.chunk.js": "/cryptgen/static/js/2.961cf562.chunk.js",
+    "static/js/2.961cf562.chunk.js.map": "/cryptgen/static/js/2.961cf562.chunk.js.map",
     "index.html": "/cryptgen/index.html",
-    "precache-manifest.74492eccb5e1782ffbd4da207d2d8bea.js": "/cryptgen/precache-manifest.74492eccb5e1782ffbd4da207d2d8bea.js",
+    "precache-manifest.b4b1dc269f7109d5670da6b8f577fa30.js": "/cryptgen/precache-manifest.b4b1dc269f7109d5670da6b8f577fa30.js",
     "service-worker.js": "/cryptgen/service-worker.js",
     "static/css/main.43d8e775.chunk.css.map": "/cryptgen/static/css/main.43d8e775.chunk.css.map",
-    "static/js/2.4953589c.chunk.js.LICENSE.txt": "/cryptgen/static/js/2.4953589c.chunk.js.LICENSE.txt"
+    "static/js/2.961cf562.chunk.js.LICENSE.txt": "/cryptgen/static/js/2.961cf562.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.517ab807.js",
-    "static/js/2.4953589c.chunk.js",
+    "static/js/2.961cf562.chunk.js",
     "static/css/main.43d8e775.chunk.css",
-    "static/js/main.ea8a0582.chunk.js"
+    "static/js/main.d9104217.chunk.js"
   ]
 }
