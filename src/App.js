@@ -3,90 +3,81 @@ import "./App.css";
 import { Header, Description } from "./Components/Header";
 import { SelectionArea } from "./Components/Selection";
 import TextArea from "./Components/TextArea";
-import {convertText} from "./functions/ConvertFunctions";
+import {setConvertText} from "./Functions/ConvertFunctions";
 import {selectionList} from "./Data/data";
 
 class App extends Component {
 	
 	state = {
-		currentInterpret: "Text",
-		currentConvert: "Flipped",
-		interpretClicked: false,
-		convertClicked: false,
-		inputText: "The quick brown fox jumps over 13 lazy dogs.",
-		outputText: "",
-		inputTextLen: 0,
-		outputTextLen: 0,
+		currentInterpretAs: "Text",
+		currentConvertTo: "Flipped",
+		interpretAsClicked: false,
+		convertToClicked: false,
+		interpretedText: "The quick brown fox jumps over a lazy dogs.",
+		originalText: "The quick brown fox jumps over a lazy dogs.",
+		convertedText: "",
+		interpretedTextLen: 0,
+		convertedTextLen: 0,
 	};
 	
 	componentDidMount() {
 
-		const currentInputText = this.state.inputText;
-		const currentConvert = this.state.currentConvert;
+		const currentInterpretedText = this.state.interpretedText;
+		const currentConvertTo = this.state.currentConvertTo;
 
-		const convertedOutput = convertText( currentInputText , currentConvert );
+		const convertedOutput = setConvertText( currentInterpretedText , currentConvertTo );
 
 		this.setState({
-			inputTextLen: currentInputText.length,
-			outputTextLen: convertedOutput.length,
-			inputText: currentInputText,
-			outputText: convertedOutput,
+			interpretedTextLen: currentInterpretedText.length,
+			convertedTextLen: convertedOutput.length,
+			interpretedText: currentInterpretedText,
+			convertedText: convertedOutput,
 		});
-
-		console.log( this.state );
 	}
-
-	transformState = () => {
-		const convertedOutput = convertText( this.state.inputText , this.state.currentConvert );
-		this.setState({
-			outputText: convertedOutput,
-		});
-		console.log( "Transform State => " , this.state );
-	};
 
 	showSelectOptionLeft = (event) => {
 		this.setState({
-			interpretClicked: !this.state.interpretClicked,
-			convertClicked: false,
+			interpretAsClicked: !this.state.interpretAsClicked,
+			convertToClicked: false,
 		});
 	};
 
 	showSelectOptionRight = (event) => {
 		this.setState({
-			convertClicked: !this.state.convertClicked,
-			interpretClicked: false,
+			convertToClicked: !this.state.convertToClicked,
+			interpretAsClicked: false,
 		});
 	};
 
-	updateInputText = (event) => {
+	updateInterpretedText = (event) => {
 		
 		this.setState({
-			inputText: event.target.value,
-			inputTextLen: event.target.value.length,
+			interpretedText: event.target.value,
+			interpretedTextLen: event.target.value.length,
 		});
-		const convertedOutput = convertText( event.target.value , this.state.currentConvert );
+		const convertedOutput = setConvertText( event.target.value , this.state.currentConvertTo );
 		this.setState({
-			outputText: convertedOutput,
-			outputTextLen: convertedOutput.length,
+			convertedText: convertedOutput,
+			convertedTextLen: convertedOutput.length,
 		})
 		
 	};
 
 	selectionClicked = (event) => {
-		if (this.state.interpretClicked) {
+		if (this.state.interpretAsClicked) {
 			const newInterpret = event.target.getAttribute("value");
 			this.setState({
-				currentInterpret: newInterpret,
-				interpretClicked: false,
+				currentInterpretAs: newInterpret,
+				interpretAsClicked: false,
 			});
-		} else if (this.state.convertClicked) {
+		} else if (this.state.convertToClicked) {
 			const newConvert = event.target.getAttribute("value");
-			const convertedOutput = convertText( this.state.inputText , newConvert );
+			const convertedOutput = setConvertText( this.state.interpretedText , newConvert );
 			this.setState({
-				currentConvert: newConvert,
-				convertClicked: false,
-				outputText: convertedOutput,
-				outputTextLen: convertedOutput.length,
+				currentConvertTo: newConvert,
+				convertToClicked: false,
+				convertedText: convertedOutput,
+				convertedTextLen: convertedOutput.length,
 			});
 		}
 	};
@@ -98,19 +89,19 @@ class App extends Component {
 					This project is license under the <strong>MIT</strong> and still under active development inspired from <a href="https://v2.cryptii.com">Cryptii</a>. This site fully run into your browser therefore no contents won't sent to any kind of server. Here you can encode and decode your text between different format systems. Please note that the encryption methods offered here are very basic and therefore <strong>not considered as secure.</strong>
 				</Description>
 				<SelectionArea
-					leftmode={this.state.currentInterpret}
-					rightmode={this.state.currentConvert}
+					leftmode={this.state.currentInterpretAs}
+					rightmode={this.state.currentConvertTo}
 					leftclick={this.showSelectOptionLeft}
 					rightclick={this.showSelectOptionRight}
 				/>
 				<TextArea
-					inputtext={this.state.inputText}
-					inputtextlen={this.state.inputTextLen}
-					outputtext={this.state.outputText}
-					outputtextlen={this.state.outputTextLen}
-					func={this.updateInputText}
-					leftmode={this.state.interpretClicked}
-					rightmode={this.state.convertClicked}
+					interpretedText={this.state.interpretedText}
+					interpretedTextLen={this.state.interpretedTextLen}
+					convertedText={this.state.convertedText}
+					convertedTextLen={this.state.convertedTextLen}
+					onChangeHandlerFunc={this.updateInterpretedText}
+					leftmode={this.state.interpretAsClicked}
+					rightmode={this.state.convertToClicked}
 					list={selectionList}
 					selectfunc={this.selectionClicked}
 				/>

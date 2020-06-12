@@ -1,10 +1,11 @@
-const flipStr = (str) => {
+const toFlippedStr = (str) => {
     let outputStr = "";
     for (let i = str.length - 1; i >= 0; i--) {
         outputStr += str[i];
     }
     return outputStr;
 };
+
 const toDecimal = (str) => {
     let outputStr = "";
     for (let i = 0; i < str.length; i++) {
@@ -12,7 +13,8 @@ const toDecimal = (str) => {
     }
     return outputStr;
 };
-const baseConvert = (number, base) => {
+
+const convertBaseTo = (number, base) => {
     let res = "";
     while (number !== 0) {
         let ld = Math.floor(number % base);
@@ -23,38 +25,41 @@ const baseConvert = (number, base) => {
         res += ld;
         number = Math.floor(number / base);
     }
-    res = flipStr(res);
+    res = toFlippedStr(res);
     return res;
 };
+
 const toBinary = (str) => {
     let outputStr = "";
     for (let i = 0; i < str.length; i++) {
-        outputStr += baseConvert(str.charCodeAt(i), 2);
-        outputStr += " ";
-    }
-    return outputStr;
-};
-const toOctal = (str) => {
-    let outputStr = "";
-    for (let i = 0; i < str.length; i++) {
-        outputStr += baseConvert(str.charCodeAt(i), 8);
-        outputStr += " ";
-    }
-    return outputStr;
-};
-const toHexa = (str) => {
-    let outputStr = "";
-    for (let i = 0; i < str.length; i++) {
-        outputStr += baseConvert(str.charCodeAt(i), 16);
+        outputStr += convertBaseTo(str.charCodeAt(i), 2);
         outputStr += " ";
     }
     return outputStr;
 };
 
-exports.convertText = (str, mode) => {
+const toOctal = (str) => {
+    let outputStr = "";
+    for (let i = 0; i < str.length; i++) {
+        outputStr += convertBaseTo(str.charCodeAt(i), 8);
+        outputStr += " ";
+    }
+    return outputStr;
+};
+
+const toHexa = (str) => {
+    let outputStr = "";
+    for (let i = 0; i < str.length; i++) {
+        outputStr += convertBaseTo(str.charCodeAt(i), 16);
+        outputStr += " ";
+    }
+    return outputStr;
+};
+
+exports.setConvertText = (str, mode) => {
     switch (mode) {
         case "Flipped":
-            return flipStr(str);
+            return toFlippedStr(str);
         case "Decimal":
             return toDecimal(str);
         case "Binary":
@@ -64,6 +69,6 @@ exports.convertText = (str, mode) => {
         case "Hexadecimal":
             return toHexa(str);
         default:
-            return this.state.inputText;
+            return str;
     }
 };
