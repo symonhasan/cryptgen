@@ -21,7 +21,6 @@ const convertBaseTo = (number, base) => {
         if( ld > 9 ){
             ld = String.fromCharCode( ld + 55 );
         }
-        console.log( ld );
         res += ld;
         number = Math.floor(number / base);
     }

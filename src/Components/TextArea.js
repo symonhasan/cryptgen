@@ -50,7 +50,7 @@ const renderRightSide = (props) => {
 			</div>
 		);
 	else {
-		return <TextBox value={props.convertedText} len={props.convertedTextLen} func={( e ) => {}}/>; // warning
+		return <TextBox value={props.convertedText} len={props.convertedTextLen} func={( e ) => { e.stopPropagation()}}/>; // warning
 	}
 };
 
